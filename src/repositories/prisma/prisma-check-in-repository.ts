@@ -45,6 +45,16 @@ class PrismaCheckInRepository implements CheckInsRepositorys {
 
     return historyCheckIns
   }
+
+  public async findUserCountCheckIns(userId: string){
+    const checkIns = await prisma.checkIn.count({
+        where: {
+            userId
+        }
+    })
+
+    return checkIns
+  }
 }
 
 export default new PrismaCheckInRepository();

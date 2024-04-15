@@ -46,6 +46,14 @@ class InMemoryCheckInRepository implements CheckInsRepositorys {
 
     return historyCheckIns;
   }
+
+  public async findUserCountCheckIns(userId: string){
+    new Promise((resolve) => setTimeout(resolve, 10));
+
+    const countUserCheckIns = this.checkIns.filter((checkIn) => checkIn.userId === userId)
+
+    return countUserCheckIns.length
+  }
 }
 
 export default new InMemoryCheckInRepository();
