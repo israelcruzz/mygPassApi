@@ -55,6 +55,29 @@ class PrismaCheckInRepository implements CheckInsRepositorys {
 
     return checkIns
   }
+
+  public async findCheckInById(checkInId: string){
+   const checkIn = await prisma.checkIn.findUnique({
+    where: {
+      id: checkInId
+    }
+   }) 
+
+   return checkIn
+  }
+
+  public async save(checkIn: ICheckIn) {
+    const checkInUpdate = await prisma.checkIn.update({
+      where: {
+        id: checkIn.id
+      },
+      data: {
+        ...checkIn
+      }
+    })
+
+    return checkInUpdate
+  }
 }
 
 export default new PrismaCheckInRepository();
