@@ -1,16 +1,24 @@
 import { GymsRepositorys } from "src/repositories/gyms-repository";
 
 interface FetchNearbyGymUseCaseRequest {
-    userLatitude: number
-    userLongitude: number
+  userLatitude: number;
+  userLongitude: number;
 }
 
 export class FetchNearbyGymUseCase {
-    constructor(private gymRepository: GymsRepositorys){
-        this.gymRepository = gymRepository
-    }
+  constructor(private gymRepository: GymsRepositorys) {
+    this.gymRepository = gymRepository;
+  }
 
-    public async execute({ userLatitude, userLongitude }: FetchNearbyGymUseCaseRequest){
+  public async execute({
+    userLatitude,
+    userLongitude,
+  }: FetchNearbyGymUseCaseRequest) {
+    const filteredGymsNearby = this.gymRepository.fetchNearbyGyms(
+      userLatitude,
+      userLongitude
+    );
 
-    }
+    return filteredGymsNearby;
+  }
 }

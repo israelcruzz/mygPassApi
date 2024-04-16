@@ -2,6 +2,7 @@ import { IGym } from "src/entitys/gym";
 import { GymsRepositorys } from "../gyms-repository";
 import { prisma } from "src/lib/prisma";
 import { Prisma } from "@prisma/client";
+import { getDistanceBetweenCoordinates } from "src/utils/get-distance-between-cordinate";
 
 class PrismaGymRepository implements GymsRepositorys {
   public async create({
@@ -51,7 +52,22 @@ class PrismaGymRepository implements GymsRepositorys {
   public async fetchNearbyGyms(userLatitude: number, userLongitude: number) {
     const fetchNearbyGyms = await prisma.gym.findMany();
 
-    return fetchNearbyGyms;
+    const filteredGymsNearby = fetchNearbyGyms.filter((gym) => {
+      const distance = getDistanceBetweenCoordinates(
+        {
+          latitude: userLatitude,
+          longitude: userLongitude,
+        },
+        {
+          latitude: Number(gym.latitude),
+          longitude: Number(gym.longitude),
+        }
+      );
+
+      return distance < 10;
+    });
+
+    return filteredGymsNearby;
   }
 }
 
