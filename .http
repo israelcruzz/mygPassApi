@@ -3,6 +3,22 @@ Content-Type: application/json
 
 {
     "name": "Israel Cruz",
-    "email": "israewl@dev.com",
+    "email": "israewlds@dev.com",
     "password": "ewqe12312321"
 }
+
+
+###
+
+POST http://localhost:3333/sessions
+Content-Type: application/json
+
+{
+    "email": "israewlds@dev.com",
+    "password": "ewqe12312321"
+}
+
+###
+
+GET http://localhost:3333/me
+Authorization: 'Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyOTM3NWE1ZS1kYzQwLTRiOTEtOTI5NS0yZTg4MDgyZGFjNzEiLCJpYXQiOjE3MTMzMTQ1Njl9.pyNKWbId-UWEVZfBY4BPJqfwsrQjsdQHTGvbnkxA4eU'

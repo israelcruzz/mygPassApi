@@ -19,7 +19,15 @@ export default async function authenticate(
 
   try {
     const user = await authenticateUseCase.execute({ email, password });
-    return reply.status(201).send(user);
+
+    return reply.jwtSign(
+      {},
+      {
+        sign: {
+          sub: user.id,
+        },
+      }
+    );
   } catch (error) {
     if (error instanceof InvalidCredentials) {
       return reply.status(409).send({ error: error.message });
